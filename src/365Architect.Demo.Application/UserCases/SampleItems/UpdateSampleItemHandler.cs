@@ -39,7 +39,8 @@ namespace _365Architect.Demo.Application.UserCases.SampleItems
             var sampleItem = sample.Items.FirstOrDefault(s => s.Id == request.Id);
             if (sampleItem == null)
                 CustomException.ThrowNotFoundException(typeof(SampleItem), MsgCode.ERR_SAMPLE_ITEM_ID_NOT_FOUND, SampleItemConst.MSG_SAMPLE_ITEM_ID_NOT_FOUND);
-
+            
+            sampleItem.UpdatedAt = DateTime.UtcNow;
             request.MapTo(sampleItem, true);
             using IDbTransaction transaction = await _unitOfWork.BeginTransactionAsync(cancellationToken);
             try

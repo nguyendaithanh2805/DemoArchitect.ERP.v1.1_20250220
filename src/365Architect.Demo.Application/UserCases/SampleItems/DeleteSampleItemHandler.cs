@@ -28,7 +28,7 @@ namespace _365Architect.Demo.Application.UserCases.SampleItems
             DeleteSampleItemValidator validator = new();
             validator.ValidateAndThrow(request);
 
-            var sample = await _sampleSqlRepository.FindByIdAsync((int)request.SampleId, true, cancellationToken);
+            var sample = await _sampleSqlRepository.FindByIdAsync((int)request.SampleId, true, cancellationToken, s => s.Items);
 
             var sampleItem = sample.Items.FirstOrDefault(s => s.Id == request.Id);
             if (sampleItem is null)
