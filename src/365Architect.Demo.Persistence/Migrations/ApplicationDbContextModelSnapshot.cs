@@ -88,6 +88,66 @@ namespace _365Architect.Demo.Persistence.Migrations
                     b.ToTable("SampleItem", (string)null);
                 });
 
+            modelBuilder.Entity("_365Architect.Demo.Domain.Entities.SampleTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Note")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Note");
+
+                    b.Property<int>("SampleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SampleId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("SampleTag", (string)null);
+                });
+
+            modelBuilder.Entity("_365Architect.Demo.Domain.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasColumnName("Name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tag", (string)null);
+                });
+
             modelBuilder.Entity("_365Architect.Demo.Domain.Entities.SampleItem", b =>
                 {
                     b.HasOne("_365Architect.Demo.Domain.Entities.Sample", "Sample")
@@ -99,9 +159,35 @@ namespace _365Architect.Demo.Persistence.Migrations
                     b.Navigation("Sample");
                 });
 
+            modelBuilder.Entity("_365Architect.Demo.Domain.Entities.SampleTag", b =>
+                {
+                    b.HasOne("_365Architect.Demo.Domain.Entities.Sample", "Sample")
+                        .WithMany("SampleTags")
+                        .HasForeignKey("SampleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("_365Architect.Demo.Domain.Entities.Tag", "Tag")
+                        .WithMany("SampleTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Sample");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("_365Architect.Demo.Domain.Entities.Sample", b =>
                 {
                     b.Navigation("Items");
+
+                    b.Navigation("SampleTags");
+                });
+
+            modelBuilder.Entity("_365Architect.Demo.Domain.Entities.Tag", b =>
+                {
+                    b.Navigation("SampleTags");
                 });
 #pragma warning restore 612, 618
         }

@@ -33,7 +33,7 @@ namespace _365Architect.Demo.Application.UserCases.Samples
         /// <exception cref="Exception"></exception>
         public Task<Result<List<Sample>>> Handle(GetAllSampleQuery request, CancellationToken cancellationToken)
         {
-            return Task.FromResult<Result<List<Sample>>>(sampleRepository.FindAll().ToList());
+            return Task.FromResult<Result<List<Sample>>>(sampleRepository.FindAll(null, false, s => s.SampleTags, s => s.Items).ToList());
         }
     }
 }

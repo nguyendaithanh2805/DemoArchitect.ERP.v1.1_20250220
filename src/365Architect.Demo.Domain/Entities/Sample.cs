@@ -1,4 +1,5 @@
-﻿using _365Architect.Demo.Domain.Abstractions.Aggregates;
+﻿using System.Text.Json.Serialization;
+using _365Architect.Demo.Domain.Abstractions.Aggregates;
 
 namespace _365Architect.Demo.Domain.Entities
 {
@@ -32,5 +33,6 @@ namespace _365Architect.Demo.Domain.Entities
         /// </summary>
         public DateTime? UpdatedAt { get; set; }
         public ICollection<SampleItem> Items { get; set; } = new List<SampleItem>();
+        public ICollection<SampleTag> SampleTags { get; set; } = new List<SampleTag>();
     }
 }

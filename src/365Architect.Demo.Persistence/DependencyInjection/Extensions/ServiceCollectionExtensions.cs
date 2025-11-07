@@ -35,6 +35,8 @@ namespace _365Architect.Demo.Persistence.DependencyInjection.Extensions
             services.AddScoped(typeof(IGenericSqlRepository<,>), typeof(GenericSqlRepository<,>));
             services.AddScoped<ISqlUnitOfWork, SqlUnitOfWork>();
             services.AddScoped<ISampleSqlRepository, SampleSqlRepository>();
+            services.AddScoped<ITagSqlRepository, TagSqlRepository>();
+            services.AddScoped<ISampleTagSqlRepository, SampleTagSqlRepository>();
             return services;
         }
     }

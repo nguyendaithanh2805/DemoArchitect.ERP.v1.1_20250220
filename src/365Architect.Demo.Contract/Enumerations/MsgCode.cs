@@ -116,5 +116,11 @@ namespace _365Architect.Demo.Contract.Enumerations
 
         ERR_BAD_REQUEST,
         #endregion
+
+        ERR_TAG_INVALID,
+        ERR_TAG_ID_NOT_FOUND,
+
+        ERR_SAMPLE_TAG_INVALID,
+        ERR_SAMPLE_TAG_ID_NOT_FOUND
     }
 }

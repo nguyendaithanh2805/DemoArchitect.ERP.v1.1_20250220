@@ -42,7 +42,7 @@ namespace _365Architect.Demo.Application.UserCases.Samples
             validator.ValidateAndThrow(request);
 
             // Find sample by id provided. If sample not found will throw NotFoundException
-            return await sampleRepository.FindByIdAsync((int)request.Id, false, cancellationToken);
+            return await sampleRepository.FindByIdAsync((int)request.Id, false, cancellationToken, s => s.SampleTags, s => s.Items);
         }
     }
 }
